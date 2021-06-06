@@ -1,0 +1,111 @@
+.app {
+  height: 100%;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.rulerColor {
+  border: 3px solid rgb(89, 106, 202);
+  border-radius: 5px;
+  opacity: 0.9;
+}
+.pruebaBotonMorado {
+  background-color: rgb(59, 44, 143) !important;
+  color: white !important;
+  border: rgb(59, 44, 143) !important;
+}
+
+.pruebaBotonMorado:hover {
+  background-color: rgb(41, 32, 95) !important;
+  border: rgb(41, 32, 95) !important;
+}
+
+.styleLogin {
+  color: rgb(4, 2, 124);
+}
+
+.footer {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1em;
+}
+
+.footer-txt-color {
+  color: rgb(89, 106, 202);
+  text-decoration: none;
+}
+
+.container-text {
+  text-align: left;
+}
+.container-img {
+  text-align: center;
+}
+
+.txt-home {
+  color: rgb(89, 106, 202);
+}
+.container-r {
+  text-align: center;
+  position: relative;
+}
+.text-left-align {
+  text-align: left !important;
+}
+.vertical-Line {
+  border-right: solid rgb(171, 71, 188);
+  border-left: solid rgb(171, 71, 188);
+  width: 0em !important;
+  padding-left: 0em !important;
+  padding-right: 0em !important;
+  margin: 1.5em !important;
+  /* margin: 0em !important; */
+  /* text-align: left; */
+  border-radius: 5px;
+}
+.minwidth {
+  min-width: 15em !important;
+}
+.paddright {
+  padding-right: 3em !important;
+}
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1);
+}
+/* div {
+  border-radius: 5px;
+} */
+.contenedor {
+  width: 100%;
+  height: 110px;
+  display: flex;
+  justify-content: space-between;
+}
+.container-p-5 {
+  height: 80px;
+  width: 10%;
+  float: left;
+}
+
+.centercard {
+  margin: 0 auto; /* Added */
+  float: none; /* Added */
+  margin-bottom: 10px; /* Added */
+}
+
+.cardsize {
+  width: 12.5rem !important;
+  margin: 0.5em !important;
+  /* padding: 1rem !important; */
+}
+
+.fullsize {
+  min-width: 100%;
+}
+
+.img {
+  height: 350px;
+  width: 250px;
+}
