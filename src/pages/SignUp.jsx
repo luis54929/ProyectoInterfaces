@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "firebase/auth";
-
 import { useFirebaseApp, useUser } from "reactfire";
 
 export default function SignUp() {

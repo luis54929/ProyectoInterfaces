@@ -24,6 +24,10 @@ body {
   border: rgb(41, 32, 95) !important;
 }
 
+.botonTransparente {
+  background-color: none !important;
+}
+
 .styleLogin {
   color: rgb(4, 2, 124);
 }

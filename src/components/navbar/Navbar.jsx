@@ -2,9 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "firebase/auth";
 import { useUser } from "reactfire";
+import { useFirebaseApp } from "reactfire";
 
 export default function Navbar() {
   const user = useUser();
+  const firebase = useFirebaseApp();
+  const logout = async () => {
+    await firebase.auth().signOut();
+  };
   return (
     <div className="navbar navbar-ligth bg-light shadow-sm">
       <div className="container">
@@ -86,6 +91,10 @@ export default function Navbar() {
             <Link className="btn btn-primary text-nowrap" to="/">
               Profile
             </Link>
+            &nbsp;
+            <button className="btn text-primary" onClick={logout}>
+              Log Out
+            </button>
           </div>
         )}
       </div>
