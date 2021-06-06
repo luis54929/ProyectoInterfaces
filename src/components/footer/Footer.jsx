@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function Footers() {
   return (
-    <footer className="footer container">
+    <footer className="footer my-footer container">
       <hr size="0" class="rulerColor"></hr>
       <div className="row">
         <Link to="/Help" className="col" style={{ textDecoration: "none" }}>

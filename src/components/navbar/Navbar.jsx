@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "firebase/auth";
+import { useFirebaseApp, useUser } from "reactfire";
 
 export default function Navbar() {
+  const user = useUser();
   return (
     <div className="navbar navbar-ligth bg-light shadow-sm">
       <div className="container">
@@ -52,22 +55,39 @@ export default function Navbar() {
             Shop
           </Link>
         </div>
-
-        <div className="d-flex align-items-center">
-          &nbsp;
-          <Link
-            className="btn btn-primary text-nowrap"
-            data-bs-toggle="button"
-            autocomplete="off"
-            to="/Login"
-          >
-            Log In
-          </Link>
-          &nbsp;
-          <Link className="btn btn-primary text-nowrap" to="/Signup">
-            Sign Up
-          </Link>
-        </div>
+        {!user.data ? (
+          <div className="d-flex align-items-center">
+            &nbsp;
+            <Link
+              className="btn btn-primary text-nowrap"
+              data-bs-toggle="button"
+              autocomplete="off"
+              to="/Login"
+            >
+              Log In
+            </Link>
+            &nbsp;
+            <Link className="btn btn-primary text-nowrap" to="/Signup">
+              Sign Up
+            </Link>
+          </div>
+        ) : (
+          <div className="d-flex align-items-center">
+            &nbsp;
+            <Link
+              className="btn btn-primary text-nowrap"
+              data-bs-toggle="button"
+              autocomplete="off"
+              to="/"
+            >
+              Cart
+            </Link>
+            &nbsp;
+            <Link className="btn btn-primary text-nowrap" to="/">
+              Profile
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
