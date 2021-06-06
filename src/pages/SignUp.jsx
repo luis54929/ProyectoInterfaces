@@ -61,11 +61,11 @@ export default function SignUp() {
                 <input
                   type="email"
                   class="form-control"
-                  id="floatingInput"
+                  id="floatingEmail"
                   placeholder="name@example.com"
                   onChange={(ev) => setEmail(ev.target.value)}
                 />
-                <label for="floatingInput">Email address</label>
+                <label for="floatingEmail">Email address</label>
               </div>
 
               <div class="form-floating p-1">
