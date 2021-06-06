@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "firebase/auth";
-import { useFirebaseApp, useUser } from "reactfire";
+import { useUser } from "reactfire";
 
 export default function Navbar() {
   const user = useUser();

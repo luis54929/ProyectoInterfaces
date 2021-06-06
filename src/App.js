@@ -1,6 +1,6 @@
 import "./styles.css";
 import React from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -11,7 +11,6 @@ import Help from "./pages/Help";
 import Book from "./pages/Book";
 import Footers from "./components/footer/Footer";
 import BooksContext from "./contexts/BooksContext";
-import { useFirebaseApp } from "reactfire";
 
 let bookList = [
   {
@@ -73,7 +72,6 @@ let bookList = [
 ];
 
 export default function App() {
-  const firebase = useFirebaseApp();
   return (
     <div className="app">
       <header>
