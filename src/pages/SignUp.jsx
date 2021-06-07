@@ -44,8 +44,6 @@ export default function SignUp(props) {
   };
 
   const logout = async () => {
-    console.log("loggin out?");
-    console.log(user);
     await firebase.auth().signOut();
   };
 
@@ -112,11 +110,11 @@ export default function SignUp(props) {
                 <input
                   type="password"
                   class="form-control"
-                  id="floatingPassword"
+                  id="floatingConfPassword"
                   placeholder="ConfirmPassword"
                   onChange={(ev) => setConfpassword(ev.target.value)}
                 />
-                <label for="floatingPassword">Confirm password</label>
+                <label for="floatingConfPassword">Confirm password</label>
               </div>
 
               {!passwordFlag ? (

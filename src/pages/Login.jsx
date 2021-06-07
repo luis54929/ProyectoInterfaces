@@ -36,8 +36,6 @@ export default function Login(props) {
   };
 
   const logout = async () => {
-    console.log("loggin out?");
-    console.log(user);
     await firebase.auth().signOut();
   };
 
