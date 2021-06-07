@@ -11,6 +11,8 @@ import Help from "./pages/Help";
 import Book from "./pages/Book";
 import Footers from "./components/footer/Footer";
 import BooksContext from "./contexts/BooksContext";
+import "firebase/firestore";
+import { useFirestoreCollectionData, useFirestore } from "reactfire";
 
 let bookList = [
   {
@@ -72,6 +74,14 @@ let bookList = [
 ];
 
 export default function App() {
+  //const booksData = useFirestoreCollectionData("books");
+  const dataRef = useFirestore().collection("books");
+  const query = dataRef.orderBy("title", "asc");
+  const bookData = useFirestoreCollectionData(query, { idField: "id" });
+  const { data, status } = bookData;
+  console.log(data);
+  console.log(bookList);
+
   return (
     <div className="app">
       <header>
@@ -79,7 +89,7 @@ export default function App() {
       </header>
       <body className="">
         <div className="container-fluid">
-          <BooksContext.Provider value={{ books: bookList }}>
+          <BooksContext.Provider value={{ books: data }}>
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/Login" component={Login} />
