@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import "firebase/auth";
 import { useFirebaseApp, useUser } from "reactfire";
 
-export default function SignUp() {
+export default function SignUp(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confpassword, setConfpassword] = useState("");
   const [passwordFlag, setPasswordFlag] = useState(true);
+  const [validCred, setValidCred] = useState("good");
+  const [checking, setChecking] = useState(false);
 
   const firebase = useFirebaseApp();
   const user = useUser();
@@ -14,6 +16,7 @@ export default function SignUp() {
   const checkPassword = () => {
     if (password === confpassword) {
       setPasswordFlag(true);
+      setChecking(true);
       submit();
     } else {
       setPasswordFlag(false);
@@ -21,7 +24,23 @@ export default function SignUp() {
   };
 
   const submit = async () => {
-    await firebase.auth().createUserWithEmailAndPassword(email, password);
+    await firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        props.history.push("/");
+        setValidCred("good");
+      })
+      .catch((err) => {
+        console.log(err);
+        if (validCred === "auth/weak-password") setValidCred(err.message);
+        else if (validCred === "auth/email-already-in-use")
+          setValidCred(err.message);
+        else setValidCred(err.message);
+      })
+      .finally(() => {
+        setChecking(false);
+      });
   };
 
   const logout = async () => {
@@ -101,7 +120,13 @@ export default function SignUp() {
               </div>
 
               {!passwordFlag ? (
-                <p className="redtext">Passwords do not match</p>
+                <p className="text-danger">Passwords do not match</p>
+              ) : (
+                ""
+              )}
+
+              {!(validCred === "good") ? (
+                <p className="text-danger">{validCred}</p>
               ) : (
                 ""
               )}
@@ -110,8 +135,20 @@ export default function SignUp() {
                 class="w-100 mx-auto d-block btn btn-lg btn-primary p-2"
                 type="submit"
                 onClick={checkPassword}
+                aria-disabled={checking ? "true" : "false"}
               >
-                Sign Up
+                {checking ? (
+                  <div>
+                    <span
+                      class="spinner-border spinner-border-sm"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                    Loading...
+                  </div>
+                ) : (
+                  "Sign Up"
+                )}
               </button>
             </body>
           </div>

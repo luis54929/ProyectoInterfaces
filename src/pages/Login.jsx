@@ -7,15 +7,32 @@ import { useFirebaseApp, useUser } from "reactfire";
 export default function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [validCred, setValidCred] = useState("good");
+  const [checking, setChecking] = useState(false);
 
   const user = useUser();
   const firebase = useFirebaseApp();
 
-  const submit = () => {
-    console.log(email, password);
-    firebase.auth().signInWithEmailAndPassword(email, password);
-    props.history.push("/");
-    // return <Redirect to="/" />;
+  const submit = async () => {
+    setChecking(true);
+    await firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        props.history.push("/");
+        setValidCred("good");
+      })
+      .catch((err) => {
+        if (err.code === "auth/invalid-email") setValidCred(err.message);
+        else if (err.code === "auth/wrong-password")
+          setValidCred("Invalid password");
+        else if (err.code === "auth/user-not-found")
+          setValidCred("This e-mail does not match any user");
+        else setValidCred(err.message);
+      })
+      .finally(() => {
+        setChecking(false);
+      });
   };
 
   const logout = async () => {
@@ -54,12 +71,30 @@ export default function Login(props) {
                 <label for="floatingPassword">Password</label>
               </div>
 
+              {!(validCred === "good") ? (
+                <p className="text-danger">{validCred}</p>
+              ) : (
+                ""
+              )}
+
               <button
                 className="w-100 btn btn-lg btn-primary p-1"
                 type="submit"
                 onClick={submit}
+                aria-disabled={checking ? "true" : "false"}
               >
-                Sign in
+                {checking ? (
+                  <div>
+                    <span
+                      class="spinner-border spinner-border-sm"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                    Loading...
+                  </div>
+                ) : (
+                  "Sign Up"
+                )}
               </button>
               <p className="p-1">
                 Forgot password? | Don't have a account yet? &nbsp;
